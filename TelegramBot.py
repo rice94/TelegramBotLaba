@@ -19,13 +19,20 @@ f.close()
 
 @bot.message_handler(func=lambda message: True,content_types=['text'])
 def echo_msg(message):
-    bot.send_message(message.chat.id,st)
+    bot.send_message(message.chat.id,message.text)
     print (message.chat.id)
+    bot.stop_polling()
     #id=message.chat.id
+
+#@bot.message_handler()
+#def nothing(message):
+   # print ('yy')
+    #time.sleep(5)
+    #bot.stop_polling()
 
 
 if __name__=='__main__':
-    #bot.polling()
+    bot.polling()
     while(1):
         shutil.copy2('/home/groot/Desktop/log','/home/groot/Desktop/log_old')
         shutil.copy2('/var/log/auth.log','/home/groot/Desktop/log')
@@ -40,7 +47,7 @@ if __name__=='__main__':
             if k==st:
                 flag_vivoda=1
 
-
+        stroka='test_log_string'
         fb.close()
         os.remove('/home/groot/Desktop/log')
         fs=open('/home/groot/Desktop/log','w')
@@ -49,7 +56,8 @@ if __name__=='__main__':
             bot.send_message(-44485918,stroka)
         fs.write(stroka)
         fs.close()
-        time.sleep(10)
+        bot.polling()
+
 
 
 

@@ -31,7 +31,6 @@ if __name__=='__main__':
         stroka=''
         for k in fb.readlines():
             if flag_vivoda==1:
-                #bot.send_message(id,k)
                 stroka+=k
                 st=k
             if k==st:
@@ -43,7 +42,7 @@ if __name__=='__main__':
         fs=open('/home/kris/log','w')
         print (stroka)
         if stroka != '':
-            bot.send_message(-44485918,stroka)
+            bot.send_message(id,stroka)
         fs.write(stroka)
         fs.close()
         bot.polling()

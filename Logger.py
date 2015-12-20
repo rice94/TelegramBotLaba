@@ -8,6 +8,7 @@ bot=telebot.TeleBot(token)
 
 @bot.message_handler(commands=['ssh'])
 def echo_msg(message):
+    chatid=message.chat.id
     len=0
     i=0
     stroka=''
@@ -22,7 +23,14 @@ def echo_msg(message):
         if i>len-10:
             stroka+=k+'\n'
     f.close()
-    bot.send_message(message.chat.id,stroka)
+    sti=open('./2.jpg','rb')
+    #res=bot.send_photo(chatid,sti,None)
+    #print (res)
+    #time.sleep(1)
+    bot.send_message(chatid,stroka)
+    #time.sleep(1)
+    #sti=open('./2.jpg','rb')
+    #bot.send_photo(chatid,sti)
     print (message.chat.id)
     id=message.chat.id
 

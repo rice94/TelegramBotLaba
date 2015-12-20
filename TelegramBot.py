@@ -5,66 +5,43 @@ import os
 
 token='158181658:AAHLsQ6HOVS4k30TtXrdTbfLAK0jF8ED5qw'
 bot=telebot.TeleBot(token)
-i = 0
-len=-1
 
 shutil.copy2('/var/log/auth.log','./log')
 f=open('./log')
 for k in f.readlines():
-    len=len+1
     line=k
-    #print (len)
 st=line
 f.close()
 
 @bot.message_handler(func=lambda message: True,content_types=['text'])
 def echo_msg(message):
-    bot.send_message(message.chat.id,message.text)
-    #print (message.chat.id)
     global chat
     chat=message.chat.id
     bot.stop_polling()
-    #id=message.chat.id
-
-#@bot.message_handler()
-#def nothing(message):
-   # print ('yy')
-    #time.sleep(5)
-    #bot.stop_polling()
-
 
 if __name__=='__main__':
-    #bot.polling()
-    chat=0
+    bot.polling()
     stroka=''
     while(1):
-        shutil.copy2('./log','./log_old')
         shutil.copy2('/var/log/auth.log','./log')
         fb=open('./log')
         flag_vivoda=0
         for k in fb.readlines():
             if flag_vivoda==1:
-                #bot.send_message(id,k)
                 stroka+=k
                 st=k
             if k==st:
                 flag_vivoda=1
 
-        #stroka='test_log_string'
         fb.close()
         os.remove('./log')
         fs=open('./log','w')
-        #print (stroka)
+        print (stroka)
         if stroka != '' and chat!=0:
             bot.send_message(chat,stroka)
             stroka=''
         fs.write(stroka)
         fs.close()
-        bot.polling()
         time.sleep(5)
-
-
-
-
 
 
